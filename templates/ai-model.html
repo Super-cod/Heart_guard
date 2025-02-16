@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background: linear-gradient(135deg, #f4f5f5, #c3cfe2);
+            background-image: url('{{ url_for("static", filename="image/heart.png") }}');
+
+        }
+        #history-container {
+            width: 300px;
+            background-color: #800a1d;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        #history-container h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        .history-item {
+            padding: 10px;
+            border-bottom: 1px solid #c21f1f;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .history-item:hover {
+            background-color: #34495e;
+        }
+        #chat-container {
+            flex: 1;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #chat-box {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 10px;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 75%;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.3s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .user-message {
+            align-self: flex-end;
+            background-color: #ce1e3c;
+            color: white;
+        }
+        .bot-message {
+            align-self: flex-start;
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        #input-container {
+            display: flex;
+            padding-top: 10px;
+        }
+        #user-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        #send-btn {
+            padding: 12px 20px;
+            background-color: #cc163a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 1em;
+            transition: background 0.3s ease;
+        }
+        #send-btn:hover {
+            background-color: #0056b3;
+        }
+        #loading {
+            display: none;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="history-container">
+        <h3>Chat History</h3>
+        <div id="history"></div>
+    </div>
+    <div id="chat-container">
+        <div id="chat-box"></div>
+        <div id="loading">Thinking...</div>
+        <div id="input-container">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Fetch chat history on page load
+        fetch('/get-history')
+            .then(response => response.json())
+            .then(data => {
+                const historyContainer = document.getElementById('history');
+                historyContainer.innerHTML = ''; // Clear previous history
+                data.reverse().forEach(([user, bot]) => { // Reverse the order
+                    const historyItem = document.createElement('div');
+                    historyItem.classList.add('history-item');
+                    historyItem.innerHTML = `<b>User:</b> ${user}<br><b>Bot:</b> ${bot}`;
+                    historyItem.onclick = () => replayChat(user, bot);
+                    historyContainer.appendChild(historyItem);
+                });
+            });
+
+
+        document.getElementById('send-btn').addEventListener('click', sendMessage);
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        let context = "I want minimal responses. Maintain a consistent conversation flow and mostly refer to medical responses.";
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value.trim();
+            if (!userInput) return;
+
+            appendMessage('user', `👤 ${userInput}`);
+            document.getElementById('user-input').value = '';
+            document.getElementById('loading').style.display = 'block';
+
+            const eventSource = new EventSource(
+                `/chat?user_input=${encodeURIComponent(userInput)}&context=${encodeURIComponent(context)}`
+            );
+
+            let botMessageElement = null;
+
+            eventSource.onmessage = function(event) {   
+                if (!event.data.trim()) return;
+                document.getElementById('loading').style.display = 'none';
+                if (!botMessageElement) {
+                    botMessageElement = appendMessage('bot', '🤖 ');
+                }
+                botMessageElement.innerHTML += event.data;
+            };
+
+            eventSource.onerror = function() {
+                eventSource.close();
+                document.getElementById('loading').style.display = 'none';
+            };
+        }
+
+        function appendMessage(sender, content) {
+            const chatBox = document.getElementById('chat-box');
+            const msgElem = document.createElement('div');
+            msgElem.classList.add('message', `${sender}-message`);
+            msgElem.innerHTML = content;
+            chatBox.appendChild(msgElem);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            return msgElem;
+        }
+
+        function replayChat(user, bot) {
+            appendMessage('user', `👤 ${user}`);
+            appendMessage('bot', `🤖 ${bot}`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Attack Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> HeartGuard AI </a>
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="model.html">Our AI Model</a>
+        <a href="upload.html">Upload ECG</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="ai-model.html" class="btn"><i class="fas fa-heartbeat"></i> HealthGuard AI</a>
+    </nav>
+    <div id="menu-btn" class="fas fa-bars"></div>
+</header>
+
+<section class="home" id="home">
+    <div class="content">
+        <h3>AI-powered Heart Attack Detection</h3>
+        <p>Upload your ECG data and let our AI model analyze it for early heart attack detection.</p>
+        <a href="upload.html" class="btn"> Try Now <span class="fas fa-chevron-right"></span> </a>
+    </div>
+    <div class="image">
+        <img src="{{ url_for('static', filename='image/heart.png') }}" alt="Home Image">
+    </div>
+</section>
+
+<section class="blogs" id="blogs">
+    <h1 class="heading"> <span>Heart Attack & Symptoms</span> </h1>
+    <div class="box-container">
+        {% for post in blog_posts %}
+        <div class="box">
+            <div class="image">
+                <img src="{{ url_for('static', filename='image/' + (post.image if post.image else 'default.jpg')) }}" alt="{{ post.title }}">
+
+            </div>
+            <div class="content">
+                <div class="icon">
+                    <a href="#"> <i class="fas fa-calendar"></i> {{ post.date }} </a>
+                    <a href="#"> <i class="fas fa-user"></i> by {{ post.author }} </a>
+                </div>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.excerpt }}</p>
+                <p><strong>Source:</strong> {{ post.source_name }}, 
+                    <a href="{{ post.source_link }}" target="_blank">{{ post.source_link_text }}</a>
+                </p>
+                <a href="{{ post.learn_more_link }}" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="/">home</a>
+            <a href="model.html"><i class="fas fa-chevron-right"></i>Our AI Model</a>
+            <a href="upload.html"><i class="fas fa-chevron-right"></i>Upload ECG</a>
+            <a href="about.html"><i class="fas fa-chevron-right"></i>About</a>
+            <a href="blog.html"><i class="fas fa-chevron-right"></i>Blog</a>
+            <a href="ai-model.html"><i class="fas fa-chevron-right"></i>HealthGuard AI</a>
+        </div>
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +91 9090808060 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> hospital@mail.com </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Chennai, India </a>
+        </div>
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+            <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+        </div>
+    </div>
+    <p>&copy; 2025 HeartGuard AI. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

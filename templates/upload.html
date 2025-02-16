@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Attack Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .loading { color: blue; text-align: center; }
+        .error { color: red; text-align: center; }
+        .results-container { margin: 20px; padding: 20px; border: 1px solid #ddd; }
+        .ecg-image { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">HeartGuard AI</a>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="model.html">Our AI Model</a>
+            <a href="upload.html">Upload ECG</a>
+            <a href="about.html">About</a>
+            <a href="blog.html">Blog</a>
+            <a href="ai-model.html" class="btn"><i class="fas fa-heartbeat"></i> HealthGuard AI</a>
+        </nav>
+    </header>
+
+    <section class="upload" id="upload">
+        <h1 class="heading">Upload <span>ECG Data</span></h1>
+        <ul class="list">
+            <li><i class="fas fa-check-circle"></i> Upload your ECG in CSV format</li>
+            <li><i class="fas fa-check-circle"></i> AI model processes your data</li>
+            <li><i class="fas fa-check-circle"></i> Get instant risk assessment</li>
+        </ul>
+        <form id="ecgUploadForm" enctype="multipart/form-data">
+            <input type="file" name="ecg_file" accept=".csv" id="ecgFile" class="box" required>
+            <input type="submit" value="Analyze Now" class="btn">
+        </form>
+        <div id="results" class="results-container"></div>
+    </section>
+
+    <script>
+        document.getElementById('ecgUploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="loading">Analyzing ECG data...</div>';
+
+            try {
+                const response = await fetch('http://localhost:5000/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Failed to fetch');
+                }
+
+                const data = await response.json();
+                
+                // Display results
+                resultsDiv.innerHTML = `
+                    <h3>${data.prediction}</h3>
+                    <p>Risk Level: ${data.risk_level}</p>
+                    <p>Recommendations:</p>
+                    <ul>${data.recommendations.map(r => `<li>${r}</li>`).join('')}</ul>
+                    <img src="data:image/png;base64,${data.ecg_image}" class="ecg-image">
+                `;
+
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                console.error('Fetch Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
