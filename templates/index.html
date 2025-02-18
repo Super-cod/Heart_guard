@@ -6,22 +6,64 @@
     <title>Heart Attack Prediction</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Heartbeat animation */
+        @keyframes beat {
+            0% {
+            transform: scale(1);
+        }
+        20% {
+            transform: scale(1.05);
+        }
+        40% {
+            transform: scale(1);
+        }
+        60% {
+            transform: scale(1.05);
+        }
+        75% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+        .home .image img {
+            animation: beat 1s ease-in-out infinite; /* Apply smoother and natural animation */
+            transition: transform 0.3s ease;
+        }
+    
+        /* Optional: Adding a little glow effect to make it more dynamic */
+        .home .image img {
+            filter: drop-shadow(0 0 10px );
+        }
+    
+        .image {
+            transform: translate(100px, 19px);
+            width: 80%; /* 80% of the parent container's width */
+            height: 500px; /* Fixed height */
+        }
+    </style>
+    
 </head>
+
 <body>
 
-<header class="header">
-    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> HeartGuard AI </a>
-    <nav class="navbar">
-        <a href="/">Home</a>
-        <a href="model.html">Our AI Model</a>
-        <a href="upload.html">Upload ECG</a>
-        <a href="about.html">About</a>
-        <a href="blog.html">Blog</a>
-        <a href="ai-model.html" class="btn"><i class="fas fa-heartbeat"></i> HealthGuard AI</a>
-    </nav>
-    <div id="menu-btn" class="fas fa-bars"></div>
-</header>
-
+    <header class="header">
+        <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> HeartGuard AI </a>
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="model.html">Our AI Model</a>
+            <a href="upload.html">Upload ECG</a>
+            <a href="about.html">About</a>
+            <a href="blog.html">Blog</a>
+            <a href="ai-model.html" class="btn"><i class="fas fa-heartbeat"></i> HealthGuard AI</a>
+            
+        </nav>
+        <div id="menu-btn" class="fas fa-bars"></div>
+    </header>
+    
 <section class="home" id="home">
     <div class="content">
         <h3>AI-powered Heart Attack Detection</h3>
@@ -32,6 +74,12 @@
         <img src="{{ url_for('static', filename='image/heart.png') }}" alt="Home Image">
     </div>
 </section>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <section class="blogs" id="blogs">
     <h1 class="heading"> <span>Heart Attack & Symptoms</span> </h1>

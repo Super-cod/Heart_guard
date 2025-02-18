@@ -7,79 +7,229 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+<style>
+/* General Section Styling */
+.about-intro {
+    padding: 5rem 10%;
+    background: linear-gradient(to right, #eef2f3, #f9f9f9);
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Headings */
+.about-intro h2 {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #6d0000;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Paragraphs */
+.about-intro p {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 850px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+}
+
+/* Featured Article Styling */
+.featured-post {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 900px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.featured-post:hover {
+    transform: translateY(-5px);
+}
+
+/* Article Title */
+.featured-post h3 {
+    color: #6d0000;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+/* Article Description */
+.featured-post p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* Read More Button */
+.featured-post .btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    background: #6d0000;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.featured-post .btn:hover {
+    background: #b71c1c;
+    transform: scale(1.05);
+}
+
+/* Research Highlights */
+.research-highlights {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 3rem auto;
+}
+
+.research-highlights h3 {
+    color: #6d0000;
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* List Styling */
+.research-highlights ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.research-highlights li {
+    padding: 1rem;
+    margin: 0.8rem 0;
+    background: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.research-highlights li:hover {
+    transform: translateX(10px);
+}
+
+.research-highlights li span {
+    color: #6d0000;
+    font-size: 1.5rem;
+    margin-right: 0.8rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .about-intro {
+        padding: 3rem 5%;
+    }
+    
+    .about-intro h2 {
+        font-size: 2.2rem;
+    }
+    
+    .featured-post {
+        padding: 2rem;
+        margin: 1.5rem auto;
+    }
+    
+    .research-highlights li {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+</style>
 <body>
 
-<header class="header">
-    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> HeartGuard AI </a>
-    <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="model.html">Our AI Model</a>
-        <a href="upload.html">Upload ECG</a>
-        <a href="about.html">About</a>
-        <a href="blog.html">Blog</a>
-        <a href="ai-model.html" class="btn"><i class="fas fa-heartbeat"></i> HealthGuard AI</a>
-    </nav>
-    <div id="menu-btn" class="fas fa-bars"></div>
-</header>
+    <header class="header">
+        <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> HeartGuard AI </a>
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="model.html">Our AI Model</a>
+            <a href="upload.html">Upload ECG</a>
+            <a href="about.html">About</a>
+            <a href="blog.html">Blog</a>
+            <a href="ai-model.html" class="btn"><i class="fas fa-heartbeat"></i> HealthGuard AI</a>
+            
+        </nav>
+        <div id="menu-btn" class="fas fa-bars"></div>
+    </header>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<section class="about-intro" style="padding: 5rem 7%; background: linear-gradient(to right, #eef2f3, #f9f9f9); text-align: center;">
+    <div class="content-block" style="max-width: 900px; margin: auto;">
+        <h2 style="font-size: 3rem; font-weight: bold; color: #333; margin-bottom: 2.1rem;">Advancing Cardiac Care Through AI Innovation</h2>
+        <p style="font-size: 1.7rem; color: #555; line-height: 1.6;">At <strong style="color: #6d0000;">HeartGuard AI</strong>, we're transforming heart health monitoring with cutting-edge technology. Dive into our latest breakthroughs in cardiovascular AI research.</p>
+        
+        <div class="featured-post" style="margin: 3rem 0; padding: 2.5rem; background: #fff; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); text-align: left;">
+            <h3 style="color: #6d0000; font-size: 2.2rem; margin-bottom: 1rem;">🚀 Featured Article: The Future of ECG Analysis</h3>
+            <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">Discover how deep learning models are achieving <strong>98% accuracy</strong> in early heart attack detection through advanced ECG pattern recognition. Our latest research breakthrough combines...</p>
+            <a href="read_full_article.html" class="btn" style="display: inline-block; margin-top: 1rem; padding: 0.8rem 1.5rem; background: #6d0000; color: white; font-size: 1rem; font-weight: bold; border-radius: 8px; text-decoration: none; transition: 0.3s;">Read Full Article</a>
+        </div>
+
+        <div class="research-highlights" style="background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+            <h3 style="color: #6d0000; font-size: 2.1rem; margin-bottom: 1.2rem;">🔬 Latest Developments</h3>
+            <ul style="list-style: none; padding: 0; margin-top: 1rem; font-size: 1.1rem; color: #444;">
+                <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                    <span style="color: #6d0000; font-size: 2.2rem; margin-right: 0.5rem;">✔</span> Real-time arrhythmia detection algorithms
+                </li>
+                <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                    <span style="color: #6d0000; font-size: 2.2rem; margin-right: 0.5rem;">✔</span> Predictive analytics for asymptomatic patients
+                </li>
+                <li style="display: flex; align-items: center;">
+                    <span style="color: #6d0000; font-size: 2.2rem; margin-right: 0.5rem;">✔</span> AI-powered personalized treatment recommendations
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
 
 <!--  blog section start -->
 <section class="blogs" id="blogs">
-
     <h1 class="heading"> our <span>blogs</span> </h1>
-
     <div class="box-container">
-
+        {% for post in blog_posts %}
         <div class="box">
             <div class="image">
-                <img src="{{ url_for('static', filename='image/blog1.jpg') }}" alt="Home Image">
-                
+                <img src="{{ url_for('static', filename='image/' + (post.image if post.image else 'default.jpg')) }}" alt="{{ post.title }}">
             </div>
             <div class="content">
                 <div class="icon">
-                    <a href="#"> <i class="fas fa-calendar"></i> 1st February, 2025 </a>
-                    <a href="#"> <i class="fas fa-user"></i> by admin </a>
+                    <a href="#"> <i class="fas fa-calendar"></i> {{ post.date }} </a>
+                    <a href="#"> <i class="fas fa-user"></i> by {{ post.author }} </a>
                 </div>
-                <h3> Recognizing the Warning Signs of a Heart Attack</h3>
-                <p>A heart attack occurs when blood flow to part of the heart muscle is blocked. Recognizing the early warning signs such as chest pain, shortness of breath, and nausea can save lives. Immediate action can significantly reduce damage and improve survival rates.</p>
-                <p><strong>Source:</strong> American Heart Association, <a href="https://www.heart.org/en/health-topics/heart-attack" target="_blank">Heart Attack Symptoms and Diagnosis</a></p>
-                <a href="https://www.heart.org/en/health-topics/heart-attack" class="btn" target="_blank"> learn more <span class="fas fa-chevron-right"></span> </a>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.excerpt }}</p>
+                <p><strong>Source:</strong> {{ post.source_name }}, 
+                    <a href="{{ post.source_link }}" target="_blank">{{ post.source_link_text }}</a>
+                </p>
+                <a href="{{ post.learn_more_link }}" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
             </div>
         </div>
-
-        <div class="box">
-            <div class="image">
-                <img src="{{ url_for('static', filename='image/blog2.webp') }}" alt="Home Image">
-            </div>
-            <div class="content">
-                <div class="icon">
-                    <a href="#"> <i class="fas fa-calendar"></i> 1st February, 2025 </a>
-                    <a href="#"> <i class="fas fa-user"></i> by admin </a>
-                </div>
-                <h3> Understanding the Symptoms of a Heart Attack</h3>
-                <p>Heart attack symptoms vary for each person, but common signs include discomfort or pressure in the chest, pain radiating down the arm, and sweating. Women may also experience nausea, lightheadedness, and unusual fatigue. Early recognition and seeking help can save lives.</p>
-                <p><strong>Source:</strong> Mayo Clinic, <a href="https://www.mayoclinic.org/diseases-conditions/heart-attack/symptoms-causes/syc-20350456" target="_blank">Heart Attack Symptoms and Causes</a></p>
-                <a href="https://www.mayoclinic.org/diseases-conditions/heart-attack/symptoms-causes/syc-20350456" class="btn" target="_blank"> learn more <span class="fas fa-chevron-right"></span> </a>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="image">
-                <img src="{{ url_for('static', filename='image/blog3.gif') }}" alt="Home Image">
-            </div>
-            <div class="content">
-                <div class="icon">
-                    <a href="#"> <i class="fas fa-calendar"></i> 1st February, 2025 </a>
-                    <a href="#"> <i class="fas fa-user"></i> by admin </a>
-                </div>
-                <h3> What to Do If You Suspect a Heart Attack</h3>
-                <p>If you suspect a heart attack, quick action is critical. Call emergency services immediately, chew aspirin if advised, and stay calm while waiting for help. These steps can minimize damage to the heart and improve the chances of survival.</p>
-                <p><strong>Source:</strong> National Heart, Lung, and Blood Institute, <a href="https://www.nhlbi.nih.gov/health/heart-attack" target="_blank">What to Do if You Have a Heart Attack</a></p>
-                <a href="https://www.nhlbi.nih.gov/health/heart-attack" class="btn" target="_blank"> learn more <span class="fas fa-chevron-right"></span> </a>
-            </div>
-        </div>
-
+        {% endfor %}
     </div>
-
 </section>
 <!--  blog section end -->
 

@@ -82,8 +82,11 @@ def generate_stream_response(model_name, context, question):
 @app.route('/')
 @app.route('/index.html')
 def home():
+    return render_template('index.html')
+@app.route('/blog.html')
+def blog():
     blog_posts = read_blog_posts()
-    return render_template('index.html', blog_posts=blog_posts)
+    return render_template('blog.html', blog_posts=blog_posts)
 
 @app.route('/about.html')
 def about():
@@ -93,9 +96,6 @@ def about():
 def ai_model():
     return render_template('ai-model.html')
 
-@app.route('/blog.html')
-def blog():
-    return render_template('blog.html')
 
 @app.route('/model.html')
 def model_page():
@@ -104,6 +104,10 @@ def model_page():
 @app.route('/upload.html')
 def upload():
     return render_template('upload.html')
+
+@app.route('/read_full_article.html')
+def read_full_article():
+    return render_template('read_full_article.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():

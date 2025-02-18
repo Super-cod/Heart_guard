@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <title>Comprehensive Heart Disease Guide</title>
+    <style>
+        /* Enhanced CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #6d0000, #6d0000);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Navigation */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            background: #2c3e50;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+
+        .nav-link {
+            color: white;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-link:hover {
+            background: #6d0000;
+            transform: translateY(-2px);
+        }
+
+        /* Content Sections */
+        .main-section {
+            margin: 4rem 0;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .section-header {
+            font-size: 3.5rem;
+            color: #6d0000;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #6d0000;
+            padding-bottom: 1rem;
+        }
+
+        /* Cardiovascular System Anatomy */
+        .anatomy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .organ-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .organ-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Disease Types */
+        .disease-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 1.5rem;
+        }
+
+        .disease-table th, .disease-table td {
+            padding: 1.2rem;
+            border: 1px solid #ddd;
+            text-align: left;
+            font-size: 1.5rem;
+        }
+
+        .disease-table th {
+            background: #6d0000;
+            color: white;
+        }
+
+        /* Prevention Strategies */
+        .prevention-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .step-icon {
+            font-size: 5.5rem;
+            color: #6d0000;
+            margin-bottom: 1rem;
+        }
+        .header {
+        padding: 2rem 9%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+}
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            header h1 {
+                font-size: 3.5rem;
+            }
+            
+            .nav-container {
+                flex-wrap: wrap;
+            }
+            
+            .nav-link {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> HeartGuard AI </a>
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="model.html">Our AI Model</a>
+        <a href="upload.html">Upload ECG</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="ai-model.html" class="btn"><i class="fas fa-heartbeat"></i> HealthGuard AI</a>
+        <button class="back" onclick="goBack()">Back</button>
+    </nav>
+    <div id="menu-btn" class="fas fa-bars"></div>
+</header>
+
+
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- Cardiovascular Anatomy Section -->
+    <section class="main-section" id="anatomy">
+        <h2 class="section-header">Understanding Heart Anatomy</h2>
+        <div class="anatomy-grid">
+            <div class="organ-card">
+                <h3>Cardiac Chambers</h3>
+                <p>The heart contains four chambers:
+                    <ul>
+                        <li>Right Atrium (receives deoxygenated blood)</li>
+                        <li>Right Ventricle (pumps to lungs)</li>
+                        <li>Left Atrium (receives oxygenated blood)</li>
+                        <li>Left Ventricle (pumps to body)</li>
+                    </ul>
+                </p>
+            </div>
+            <div class="organ-card">
+                <h3>Major Blood Vessels</h3>
+                <p>Critical components include:
+                    <ul>
+                        <li>Aorta (largest artery)</li>
+                        <li>Pulmonary Arteries</li>
+                        <li>Coronary Arteries</li>
+                        <li>Superior/Inferior Vena Cava</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disease Classification Section -->
+    <section class="main-section" id="types">
+        <h2 class="section-header">Cardiovascular Disease Classification</h2>
+        <table class="disease-table">
+            <thead>
+                <tr>
+                    <th>Disease Type</th>
+                    <th>Prevalence</th>
+                    <th>Key Symptoms</th>
+                    <th>Risk Factors</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Coronary Artery Disease</td>
+                    <td>6.7% US adults</td>
+                    <td>Angina, Shortness of breath</td>
+                    <td>Smoking, High cholesterol</td>
+                </tr>
+                <tr>
+                    <td>Heart Failure</td>
+                    <td>1-2% adults</td>
+                    <td>Edema, Fatigue</td>
+                    <td>Hypertension, Diabetes</td>
+                </tr>
+                <!-- Add 8 more rows with detailed information -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Prevention Section -->
+    <section class="main-section" id="prevention">
+        <h2 class="section-header">Prevention Strategies</h2>
+        <div class="prevention-steps">
+            <div class="step-card">
+                <div class="step-icon">♥</div>
+                <h3>Dietary Management</h3>
+                <p>Mediterranean diet benefits:
+                    <ul>
+                        <li>Omega-3 fatty acids</li>
+                        <li>Antioxidant-rich foods</li>
+                        <li>Fiber intake</li>
+                    </ul>
+                </p>
+            </div>
+            <div class="step-card">
+                <div class="step-icon">🏃</div>
+                <h3>Exercise Guidelines</h3>
+                <p>Recommended routine:
+                    <ul>
+                        <li>150 mins/week moderate exercise</li>
+                        <li>Strength training 2x/week</li>
+                        <li>HIIT benefits</li>
+                    </ul>
+                </p>
+            </div>
+            <!-- Add 8 more prevention cards -->
+        </div>
+    </section>
+    <!-- Risk Factors Section -->
+<section class="main-section" id="risk-factors">
+    <h2 class="section-header">Key Risk Factors Analysis</h2>
+    <div class="anatomy-grid">
+        <div class="organ-card">
+            <h3>Modifiable Risks</h3>
+            <ul>
+                <li>Hypertension (>130/80 mmHg)</li>
+                <li>LDL Cholesterol >100 mg/dL</li>
+                <li>BMI >25 kg/m²</li>
+                <li>Physical inactivity</li>
+            </ul>
+        </div>
+        <div class="organ-card">
+            <h3>Non-Modifiable Risks</h3>
+            <ul>
+                <li>Family history (1st degree relative)</li>
+                <li>Male sex (pre-menopause)</li>
+                <li>Age >45(M)/55(F)</li>
+                <li>Genetic markers (APOB, PCSK9)</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Diagnostic Methods Section -->
+<section class="main-section" id="diagnostics">
+    <h2 class="section-header">Advanced Diagnostic Techniques</h2>
+    <div class="prevention-steps">
+        <div class="step-card">
+            <div class="step-icon">🩺</div>
+            <h3>Imaging Technologies</h3>
+            <ul>
+                <li>Coronary CT Angiography</li>
+                <li>Cardiac MRI (0.55-1.5T)</li>
+                <li>3D Echocardiography</li>
+            </ul>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">💉</div>
+            <h3>Biomarker Testing</h3>
+            <ul>
+                <li>High-sensitivity Troponin</li>
+                <li>BNP/NT-proBNP</li>
+                <li>Lipoprotein(a) testing</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Treatment Options Section -->
+<section class="main-section" id="treatment">
+    <h2 class="section-header">Modern Treatment Approaches</h2>
+    <table class="disease-table">
+        <thead>
+            <tr>
+                <th>Intervention</th>
+                <th>Procedure</th>
+                <th>Success Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PCI</td>
+                <td>Percutaneous Coronary Intervention</td>
+                <td>92% immediate success</td>
+            </tr>
+            <tr>
+                <td>CABG</td>
+                <td>Coronary Artery Bypass Grafting</td>
+                <td>98% 1-year survival</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Living with Heart Disease Section -->
+<section class="main-section" id="living">
+    <h2 class="section-header">Disease Management Strategies</h2>
+    <div class="anatomy-grid">
+        <div class="organ-card">
+            <h3>Medication Adherence</h3>
+            <ul>
+                <li>Antiplatelet therapy</li>
+                <li>Beta-blocker regimens</li>
+                <li>Statin protocols</li>
+            </ul>
+        </div>
+        <div class="organ-card">
+            <h3>Lifestyle Adaptation</h3>
+            <ul>
+                <li>Stress reduction techniques</li>
+                <li>Cardiac rehabilitation</li>
+                <li>Sleep hygiene</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Emerging Research Section -->
+<section class="main-section" id="research">
+    <h2 class="section-header">Cutting-Edge Research (2025)</h2>
+    <div class="prevention-steps">
+        <div class="step-card">
+            <div class="step-icon">🧬</div>
+            <h3>Gene Therapy</h3>
+            <ul>
+                <li>PCSK9 inhibitors</li>
+                <li>ANGPTL3 targeting</li>
+                <li>CRISPR applications</li>
+            </ul>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">🤖</div>
+            <h3>AI Diagnostics</h3>
+            <ul>
+                <li>ECG pattern recognition</li>
+                <li>Predictive analytics</li>
+                <li>Remote monitoring</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Patient Stories Section -->
+<section class="main-section" id="stories">
+    <h2 class="section-header">Patient Experiences</h2>
+    <div class="anatomy-grid">
+        <div class="organ-card">
+            <h3>Recovery Journeys</h3>
+            <ul>
+                <li>Post-MI rehabilitation</li>
+                <li>Heart transplant stories</li>
+                <li>Arrhythmia management</li>
+            </ul>
+        </div>
+        <div class="organ-card">
+            <h3>Caregiver Perspectives</h3>
+            <ul>
+                <li>Emotional support</li>
+                <li>Daily care challenges</li>
+                <li>Healthcare navigation</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Global Statistics Section -->
+<section class="main-section" id="statistics">
+    <h2 class="section-header">Worldwide Cardiovascular Data</h2>
+    <table class="disease-table">
+        <thead>
+            <tr>
+                <th>Region</th>
+                <th>Prevalence</th>
+                <th>Mortality Rate</th>
+                <th>Trend</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>North America</td>
+                <td>7.2%</td>
+                <td>127/100,000</td>
+                <td>↓ 12% since 2020</td>
+            </tr>
+            <tr>
+                <td>Europe</td>
+                <td>9.1%</td>
+                <td>143/100,000</td>
+                <td>↓ 8% since 2020</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<!-- Emergency Protocols Section -->
+<section class="main-section" id="emergency">
+    <h2 class="section-header">Cardiac Emergency Protocols</h2>
+    <div class="anatomy-grid">
+        <div class="organ-card">
+            <h3>Critical Response Steps</h3>
+            <ul>
+                <li>CPR administration (100-120 compressions/min)</li>
+                <li>AED usage guidelines</li>
+                <li>STEMI recognition</li>
+            </ul>
+        </div>
+        <div class="organ-card">
+            <h3>Emergency Medications</h3>
+            <ul>
+                <li>Nitroglycerin administration</li>
+                <li>Aspirin chelation</li>
+                <li>Thrombolytic therapy</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Pediatric Cardiology Section -->
+<section class="main-section" id="pediatric">
+    <h2 class="section-header">Child Heart Health</h2>
+    <table class="disease-table">
+        <thead>
+            <tr>
+                <th>Condition</th>
+                <th>Incidence</th>
+                <th>Intervention</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Congenital Defects</td>
+                <td>1% of births</td>
+                <td>Neonatal surgery</td>
+            </tr>
+            <tr>
+                <td>Kawasaki Disease</td>
+                <td>25/100,000</td>
+                <td>IVIG therapy</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Women's Cardiology Section -->
+<section class="main-section" id="womens-health">
+    <h2 class="section-header">Female-Specific Risks</h2>
+    <div class="prevention-steps">
+        <div class="step-card">
+            <div class="step-icon">🌸</div>
+            <h3>Pregnancy Complications</h3>
+            <ul>
+                <li>Pre-eclampsia monitoring</li>
+                <li>Postpartum cardiomyopathy</li>
+                <li>Gestational diabetes</li>
+            </ul>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">💊</div>
+            <h3>Hormonal Factors</h3>
+            <ul>
+                <li>Menopause transition risks</li>
+                <li>OCP-related thrombosis</li>
+                <li>HRT considerations</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Technology Section -->
+<section class="main-section" id="technology">
+    <h2 class="section-header">Medical Innovations</h2>
+    <div class="anatomy-grid">
+        <div class="organ-card">
+            <h3>Implantable Devices</h3>
+            <ul>
+                <li>LVAD systems</li>
+                <li>Smart pacemakers</li>
+                <li>Bio-absorbable stents</li>
+            </ul>
+        </div>
+        <div class="organ-card">
+            <h3>Monitoring Systems</h3>
+            <ul>
+                <li>Implantable loop recorders</li>
+                <li>Remote CIED checks</li>
+                <li>Wearable ECG patches</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Mental Health Section -->
+<section class="main-section" id="mental-health">
+    <h2 class="section-header">Psychological Factors</h2>
+    <table class="disease-table">
+        <thead>
+            <tr>
+                <th>Condition</th>
+                <th>Cardiac Impact</th>
+                <th>Management</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Chronic Stress</td>
+                <td>+40% CVD risk</td>
+                <td>CBT interventions</td>
+            </tr>
+            <tr>
+                <td>Depression</td>
+                <td>2x mortality rate</td>
+                <td>SSRI therapy</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Rehabilitation Section -->
+<section class="main-section" id="rehab">
+    <h2 class="section-header">Recovery Programs</h2>
+    <div class="prevention-steps">
+        <div class="step-card">
+            <div class="step-icon">🏥</div>
+            <h3>Phase-Based Therapy</h3>
+            <ul>
+                <li>Inpatient mobilization</li>
+                <li>Outpatient training</li>
+                <li>Long-term maintenance</li>
+            </ul>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">📱</div>
+            <h3>Digital Tools</h3>
+            <ul>
+                <li>Tele-rehabilitation</li>
+                <li>ECG-enabled wearables</li>
+                <li>Medication trackers</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Nutrition Section -->
+<section class="main-section" id="nutrition">
+    <h2 class="section-header">Advanced Dietary Science</h2>
+    <div class="anatomy-grid">
+        <div class="organ-card">
+            <h3>Cardioprotective Nutrients</h3>
+            <ul>
+                <li>Omega-3 (1g/day)</li>
+                <li>Potassium (4700mg/day)</li>
+                <li>Plant sterols (2g/day)</li>
+            </ul>
+        </div>
+        <div class="organ-card">
+            <h3>Risk-Reduction Diets</h3>
+            <ul>
+                <li>DASH diet protocols</li>
+                <li>Low sodium (<1500mg)</li>
+                <li>Mediterranean variations</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+    <!-- Add 7 more comprehensive sections following similar structure -->
+
+</div>
+<!-- Risk Factors Section -->
+<section class="main-section" id="risk-factors">
+    <h2 class="section-header">Cardiac Risk Factors</h2>
+    <div class="anatomy-grid">
+        <div class="organ-card">
+            <h3>Modifiable Risks</h3>
+            <ul>
+                <li>Hypertension (>140/90 mmHg)</li>
+                <li>LDL Cholesterol >130 mg/dL</li>
+                <li>BMI >30 kg/m²</li>
+                <li>Smoking (15+ cigarettes/day)</li>
+            </ul>
+        </div>
+        <div class="organ-card">
+            <h3>Non-Modifiable Risks</h3>
+            <ul>
+                <li>Family history of CVD</li>
+                <li>Age >55 (Male)/65 (Female)</li>
+                <li>Genetic predisposition (APOE gene)</li>
+                <li>Autoimmune conditions</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Diagnostic Tools Section -->
+<section class="main-section" id="diagnostics">
+    <h2 class="section-header">Advanced Diagnostics</h2>
+    <table class="disease-table">
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Purpose</th>
+                <th>Accuracy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Cardiac CT</td>
+                <td>Calcium scoring</td>
+                <td>95% specificity</td>
+            </tr>
+            <tr>
+                <td>Stress Echo</td>
+                <td>Ischemia detection</td>
+                <td>89% sensitivity</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Treatment Options Section -->
+<section class="main-section" id="treatments">
+    <h2 class="section-header">Modern Treatments</h2>
+    <div class="prevention-steps">
+        <div class="step-card">
+            <div class="step-icon">💊</div>
+            <h3>Pharmacotherapy</h3>
+            <ul>
+                <li>PCSK9 inhibitors</li>
+                <li>SGLT2 inhibitors</li>
+                <li>Anticoagulants</li>
+            </ul>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">⚕️</div>
+            <h3>Surgical Options</h3>
+            <ul>
+                <li>TAVR procedures</li>
+                <li>Robotic CABG</li>
+                <li>LVAD implantation</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Rehabilitation Section -->
+<section class="main-section" id="rehab">
+    <h2 class="section-header">Cardiac Recovery</h2>
+    <div class="anatomy-grid">
+        <div class="organ-card">
+            <h3>Phase II Rehab</h3>
+            <ul>
+                <li>Supervised exercise</li>
+                <li>Risk factor mod.</li>
+                <li>Psych support</li>
+            </ul>
+        </div>
+        <div class="organ-card">
+            <h3>Home Care</h3>
+            <ul>
+                <li>Remote monitoring</li>
+                <li>Med adherence</li>
+                <li>Diet tracking</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Emerging Tech Section -->
+<section class="main-section" id="tech">
+    <h2 class="section-header">Medical Innovations</h2>
+    <table class="disease-table">
+        <thead>
+            <tr>
+                <th>Technology</th>
+                <th>Application</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>AI ECG Analysis</td>
+                <td>Early detection</td>
+                <td>FDA Approved</td>
+            </tr>
+            <tr>
+                <td>Bio-absorbable Stents</td>
+                <td>PCI improvements</td>
+                <td>Phase III Trials</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Women's Health Section -->
+<section class="main-section" id="womens-health">
+    <h2 class="section-header">Female Cardiology</h2>
+    <div class="prevention-steps">
+        <div class="step-card">
+            <div class="step-icon">🌸</div>
+            <h3>Unique Risks</h3>
+            <ul>
+                <li>Pregnancy complications</li>
+                <li>Autoimmune prevalence</li>
+                <li>Microvascular disease</li>
+            </ul>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">🩺</div>
+            <h3>Diagnostic Challenges</h3>
+            <ul>
+                <li>Atypical symptoms</li>
+                <li>Test accuracy variance</li>
+                <li>Hormonal influences</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Global Trends Section -->
+<section class="main-section" id="global">
+    <h2 class="section-header">Worldwide Statistics</h2>
+    <div class="anatomy-grid">
+        <div class="organ-card">
+            <h3>Prevalence</h3>
+            <ul>
+                <li>Europe: 9.2%</li>
+                <li>Asia: 6.8%</li>
+                <li>Africa: 5.1%</li>
+            </ul>
+        </div>
+        <div class="organ-card">
+            <h3>Mortality</h3>
+            <ul>
+                <li>31% global deaths</li>
+                <li>85% preventable</li>
+                <li>$320B annual cost</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<footer class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="index.html">home</a>
+            <a href="model.html"><i class="fas fa-chevron-right"></i>Our AI Model</a>
+            <a href="upload.html"><i class="fas fa-chevron-right"></i>Upload ECG</a>
+            <a href="about.html"><i class="fas fa-chevron-right"></i>About</a>
+            <a href="blog.html"><i class="fas fa-chevron-right"></i>Blog</a>
+            <a href="ai-model.html"><i class="fas fa-chevron-right"></i>HealthGuard AI</a>
+        </div>
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +91 9090808060 </a>
+            <a href="#"> <i class="fas fa-phone"></i> +91 9090808060 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> hospital@mail.com </a>
+            <a href="#"> <i class="fas fa-envelope"></i> hospital@mail.com </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Chennai, India </a>
+        </div>
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+            <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+            <a href="#"> <i class="fab fa-pinterest"></i> pinterest </a>
+        </div>
+    </div>
+    <p>&copy; 2025 HeartGuard AI. All Rights Reserved.</p>
+</footer>
+
+<script>
+    function goBack() {
+    window.location.href = "blog.html"; 
+    }
+</script>
+</body>
+</html>

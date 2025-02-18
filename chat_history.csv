@@ -40,3 +40,16 @@ For example:
 You: ""I have been experiencing symptoms of a cold.""
 Me: ""Symptoms of a common cold include runny nose, cough, sore throat, and congestion."""
 hello, Hello! How can I help you with your health-related questions or concerns today?
+hello bro, Hello! How can I assist you with health-related inquiries today?
+hello," Hello! I'm here to help with your health-related questions or concerns. Please feel free to ask anything you might have. Keep in mind, I'm not a doctor, but I can certainly help you find credible information on various health topics."
+what are u doing," I am providing information about various health topics, based on the user's queries. How can I assist you today?"
+waht is the formula of gradint decent," The basic formula for gradient descent, a common optimization algorithm used in machine learning, is as follows:
+
+w = w - α * grad(L)(w)
+
+Here's what each symbol represents:
+- w refers to the weight or parameters being updated.
+- α (alpha) is the learning rate, which controls the step size taken during each update.
+- grad(L)(w) is the gradient of the loss function L with respect to w. This tells us the direction and magnitude of the error in our prediction for a given weight, allowing us to adjust the weights in the correct direction to minimize the loss."
+hello, Hello! How can I help you with your health-related questions or concerns today?
+how are u," I am an AI, not capable of feelings or health conditions. However, I can help answer your questions related to health or medical issues. How may I assist you today?"

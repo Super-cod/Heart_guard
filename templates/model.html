@@ -4,7 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart Attack Prediction - AI Model</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style1.css') }}">
+    <style>
+        /* Doctor Grid Layout */
+.doctors .box-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-gap: 20px; /* Space between grid items */
+    padding: 20px;
+}
+
+/* Doctor Box Styling */
+.doctors .box {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.doctors .box img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.doctors .box h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.doctors .box span {
+    display: block;
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.doctors .box .share a {
+    margin: 0 10px;
+    font-size: 1.2rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.doctors .box .share a:hover {
+    color: #007BFF;
+}
+
+    </style>
+    
 </head>
 <body background="{{ url_for('static', filename='image/model.png') }}">
     
@@ -74,7 +124,7 @@
             </div>
         </div>
         <div class="cta">
-            <a href="upload.html" class="btn">Upload Your ECG Now <i class="fas fa-upload"></i></a>
+            <a href="ai-model.html" class="btn">Try our model<i class="fas fa-upload"></i></a>
         </div>
     </div>
 
@@ -142,11 +192,10 @@
             
             <section class="doctors" id="doctors">
                 <h2>Meet the Team</h2>
-            
                 <div class="box-container">
-            
+                    <!-- Doctor 1 -->
                     <div class="box">
-                        <img src="{{ url_for('static', filename='images/team1.png') }}" alt="Home Image">
+                        <img src="{{ url_for('static', filename='image/team1.png') }}" alt="Doctor Image">
                         <h3>Jonny Joestar</h3>
                         <span>Data Scientist</span>
                         <div class="share">
@@ -157,8 +206,9 @@
                         </div>
                     </div>
             
+                    <!-- Doctor 2 -->
                     <div class="box">
-                        <img src="{{ url_for('static', filename='images/team2.png') }}" alt="Home Image">
+                        <img src="{{ url_for('static', filename='image/team2.png') }}" alt="Doctor Image">
                         <h3>Shang Chi</h3>
                         <span>Expert Developer</span>
                         <div class="share">
@@ -169,8 +219,9 @@
                         </div>
                     </div>
             
+                    <!-- Doctor 3 -->
                     <div class="box">
-                        <img src="{{ url_for('static', filename='images/team3.png') }}" alt="Home Image">
+                        <img src="{{ url_for('static', filename='image/team3.png') }}" alt="Doctor Image">
                         <h3>Jake</h3>
                         <span>Machine Learning Engineer</span>
                         <div class="share">
@@ -180,9 +231,10 @@
                             <a href="#" class="fab fa-linkedin"></a>
                         </div>
                     </div>
-
+            
+                    <!-- Doctor 4 -->
                     <div class="box">
-                        <img src="{{ url_for('static', filename='images/team4.png') }}" alt="Home Image">
+                        <img src="{{ url_for('static', filename='image/team4.png') }}" alt="Doctor Image">
                         <h3>Tyrone</h3>
                         <span>Doctor</span>
                         <div class="share">
@@ -192,17 +244,16 @@
                             <a href="#" class="fab fa-linkedin"></a>
                         </div>
                     </div>
-            
                 </div>
-            
             </section>
+            
             
 
             <h2>Join Us in Our Mission</h2>
             <p>Heart health is a global priority, and we believe that everyone deserves access to reliable and affordable cardiac care. Whether you're a healthcare provider, a patient, or a technology enthusiast, you can be part of our journey. Together, we can create a healthier future for all.</p>
             <div class="cta">
                 <a href="upload.html" class="btn">Get Started <i class="fas fa-arrow-right"></i></a>
-                <a href="contact.html" class="btn">Contact Us <i class="fas fa-envelope"></i></a>
+                <a href="#" class="btn">Contact Us <i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </div>
