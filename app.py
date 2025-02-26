@@ -22,7 +22,7 @@ ecg_model = load_model('ecg_heart_attack_model.h5')
 scaler = joblib.load('scaler.joblib')
 
 # Google Gemini API settings
-GEMINI_API_KEY = "AIzaSyBAn17HEp1fQJT_7L0BxZw3TTOh99HHcsk"
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "YOUR_API_KEY")
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
 
 if not os.path.isfile(CHAT_HISTORY_FILE):
