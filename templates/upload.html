@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart Attack Prediction</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -14,7 +14,9 @@
     </style>
 </head>
 <body>
-    <header class="header">
+
+
+       <header class="header">
         <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> HeartGuard AI </a>
         <nav class="navbar">
             <a href="/">Home</a>
@@ -40,6 +42,20 @@
             <input type="submit" value="Analyze Now" class="btn">
         </form>
         <div id="results" class="results-container"></div>
+    </section>
+
+    <section class="upload" id="upload-image">
+        <h1 class="heading">Upload <span>Medical Image</span></h1>
+        <ul class="list">
+            <li><i class="fas fa-check-circle"></i> Upload your image (JPG/PNG)</li>
+            <li><i class="fas fa-check-circle"></i> AI model analyzes your image</li>
+            <li><i class="fas fa-check-circle"></i> Get instant prediction</li>
+        </ul>
+        <form id="imageUploadForm" enctype="multipart/form-data">
+            <input type="file" name="image_file" accept="image/*" id="imageFile" required>
+            <input type="submit" value="Analyze Image" class="btn">
+        </form>
+        <div id="image-results" class="results-container"></div>
     </section>
 
     <script>
@@ -75,6 +91,35 @@
             } catch (error) {
                 resultsDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
                 console.error('Fetch Error:', error);
+            }
+        });
+
+        document.getElementById('imageUploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const resultsDiv = document.getElementById('image-results');
+            resultsDiv.innerHTML = '<div class="loading">Analyzing image...</div>';
+
+            try {
+                const response = await fetch('http://localhost:5000/upload-image', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to analyze image');
+                }
+
+                resultsDiv.innerHTML = `
+                    <h3>Prediction: ${data.predicted_class}</h3>
+                    <p>Confidence: ${data.confidence}</p>
+                `;
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                console.error('Image Upload Error:', error);
             }
         });
     </script>

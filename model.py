@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 def load_data(filename):
     data = []
     labels = []
-    with open(filename, 'r') as f:
+    with open(filename, 'r') as f:  
         for line in f:
             values = list(map(float, line.strip().split(',')))
             data.append(values[:-1])  # All values except last

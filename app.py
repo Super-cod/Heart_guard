@@ -13,6 +13,10 @@ from flask_cors import CORS
 import random
 import requests
 import json
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.preprocessing import image
+import os
 
 app = Flask(__name__)
 CORS(app)  
@@ -22,7 +26,7 @@ ecg_model = load_model('ecg_heart_attack_model.h5')
 scaler = joblib.load('scaler.joblib')
 
 # Google Gemini API settings
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "YOUR_API_KEY")
+GEMINI_API_KEY = "AIzaSyBAn17HEp1fQJT_7L0BxZw3TTOh99HHcsk"
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
 
 if not os.path.isfile(CHAT_HISTORY_FILE):
@@ -107,10 +111,10 @@ def generate_stream_response(context, question):
         if 'candidates' in response_data and len(response_data['candidates']) > 0:
             text_response = response_data['candidates'][0]['content']['parts'][0]['text']
             
-            # Save the response to the chat history
+            
             save_to_csv(question, text_response)
             
-            # Stream the response word by word (simulating streaming)
+            
             words = text_response.split()
             for word in words:
                 yield f"data: {word} \n\n"
@@ -230,6 +234,44 @@ def chat_non_stream():
 def get_history():
     history = load_chat_history()
     return jsonify(history)
+
+from PIL import Image
+import io
+image_model = load_model('my_model1.h5')
+image_class_names= sorted(os.listdir(r'C:\Users\swaya\Desktop\Timepass\JAI BHAI\Combined Dataset\train'))
+def preprocess_image(img_stream, img_height=160, img_width=160):
+    try:
+        # Read image bytes directly
+        img_bytes = img_stream.read()
+        img = Image.open(io.BytesIO(img_bytes)).convert('RGB')
+        img = img.resize((img_height, img_width))
+        img_array = image.img_to_array(img) / 255.0
+        return np.expand_dims(img_array, axis=0)
+    except Exception as e:
+        raise ValueError(f"Image processing failed: {str(e)}")
+
+@app.route('/upload-image', methods=['POST'])
+def upload_image():
+    if 'image_file' not in request.files:
+        return jsonify(error='No image uploaded'), 400
+        
+    file = request.files['image_file']
+    if file.filename == '':
+        return jsonify(error='No selected file'), 400
+
+    try:
+        img_array = preprocess_image(file)
+        predictions = image_model.predict(img_array)
+        predicted_class = image_class_names[np.argmax(predictions)]
+        confidence = float(np.max(predictions))
+
+        return jsonify(
+            predicted_class=predicted_class,
+            confidence=f"{confidence*100:.2f}%"
+        )
+    except Exception as e:
+        return jsonify(error=f'Error processing image: {str(e)}'), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
